@@ -3,7 +3,6 @@
 }
 
 body {
-
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   background-image: url("img/Fondo.jpg");
@@ -14,7 +13,6 @@ body {
   color: #333;
 }
 
-
 .container {
   width: 92%;
   max-width: 800px;
@@ -24,10 +22,12 @@ body {
 
 .hero {
   text-align: center;
-  background: #ffd6e2;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
   padding: 30px 20px;
   border-radius: 20px;
   margin-bottom: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .hero h1 {
@@ -42,7 +42,8 @@ body {
 }
 
 .form-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
   padding: 20px;
   border-radius: 16px;
   margin-bottom: 25px;
@@ -81,7 +82,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: white;
+  background: rgba(255, 255, 255, 0.92);
   padding: 14px 16px;
   border-radius: 14px;
   border: 2px solid transparent;
@@ -93,7 +94,7 @@ h2 {
 }
 
 .gift-item.taken {
-  background: #ffe1e1;
+  background: rgba(255, 210, 210, 0.92);
   border-color: #ff7b7b;
   color: #b30000;
 }
@@ -123,6 +124,7 @@ h2 {
   font-size: 17px;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .reserve-btn:hover {
@@ -138,6 +140,9 @@ h2 {
   text-align: center;
   margin-top: 18px;
   font-weight: bold;
+  background: rgba(255, 255, 255, 0.88);
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .success {
@@ -147,8 +152,10 @@ h2 {
 .error {
   color: #c5221f;
 }
+
 .manage-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
   padding: 20px;
   border-radius: 16px;
   margin-top: 35px;
@@ -183,7 +190,7 @@ h2 {
 }
 
 .reservation-item {
-  background: #f7f7f7;
+  background: rgba(247, 247, 247, 0.92);
   padding: 14px;
   border-radius: 14px;
   display: flex;
@@ -203,4 +210,27 @@ h2 {
 
 .cancel-btn:hover {
   background: #b3261e;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 26px;
+  }
+
+  .gift-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .reservation-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .cancel-btn {
+    width: 100%;
+  }
 }
