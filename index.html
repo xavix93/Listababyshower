@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Baby Shower Amaia</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Baby Shower de Amaia</h1>
+      <p>
+        Elige hasta 3 regalitos de la lista y deja tu correo para confirmar tu selección.
+      </p>
+    </section>
+
+    <section class="form-card">
+      <label for="email">Tu correo</label>
+      <input 
+        type="email" 
+        id="email" 
+        placeholder="ejemplo@correo.com" 
+        autocomplete="email"
+      />
+
+      <p class="info">
+        Puedes seleccionar máximo 3 regalos.
+      </p>
+    </section>
+
+    <section>
+      <h2>Lista de regalos</h2>
+      <div id="giftList" class="gift-list">
+        <p>Cargando regalos...</p>
+      </div>
+    </section>
+
+    <button id="reserveBtn" class="reserve-btn">
+      Confirmar regalos
+    </button>
+
+    <p id="message" class="message"></p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
