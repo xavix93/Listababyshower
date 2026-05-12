@@ -23,19 +23,22 @@ body {
 .hero {
   text-align: center;
   background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(4px);
   padding: 20px;
   border-radius: 20px;
   margin-bottom: 25px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
 }
+
 .hero-img {
   width: 100%;
+  max-width: 420px;
+  height: auto;
   max-height: 260px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 18px;
+  object-fit: contain;
   display: block;
+  margin: 0 auto 18px auto;
+  border-radius: 16px;
 }
 
 .hero h1 {
