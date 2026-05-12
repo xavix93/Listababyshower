@@ -258,3 +258,46 @@ h2 {
     width: 100%;
   }
 }
+/* FORZAR TODO CENTRADO */
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  background: #fff6f8;
+}
+
+main.container {
+  width: 92% !important;
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 30px 0 !important;
+}
+
+/* Asegura que ninguna sección se salga */
+.hero,
+.form-card,
+.manage-card,
+.gift-list,
+.reserve-btn,
+.message,
+section {
+  max-width: 800px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Las tarjetas de regalo quedan dentro del ancho */
+.gift-item {
+  width: 100% !important;
+}
+
+/* Imagen del encabezado centrada */
+.hero-img {
+  width: 100% !important;
+  max-width: 420px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto 18px auto !important;
+}
