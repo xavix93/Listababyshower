@@ -299,7 +299,7 @@ section {
 /* Imagen del encabezado centrada */
 .hero-img {
   width: 100% !important;
-  max-width: 420px !important;
+  max-width: 760px !important;
   height: auto !important;
   object-fit: contain !important;
   display: block !important;
