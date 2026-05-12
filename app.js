@@ -5,6 +5,9 @@ const reserveBtn = document.getElementById("reserveBtn");
 const message = document.getElementById("message");
 const emailInput = document.getElementById("email");
 
+const myReservationsBtn = document.getElementById("myReservationsBtn");
+const myReservations = document.getElementById("myReservations");
+
 let gifts = [];
 
 async function loadGifts() {
@@ -22,8 +25,17 @@ async function loadGifts() {
     renderGifts();
 
   } catch (error) {
-    giftList.innerHTML = "<p>No se pudo cargar la lista de regalos.</p>";
-    console.error(error);
+    console.error("Error al cargar regalos:", error);
+
+    giftList.innerHTML = `
+      <div class="gift-item taken">
+        <div>
+          <span class="gift-name">No se pudo cargar la lista</span>
+          <br>
+          <small>${error.message}</small>
+        </div>
+      </div>
+    `;
   }
 }
 
@@ -105,6 +117,7 @@ async function reserveGifts() {
         "Content-Type": "text/plain;charset=utf-8"
       },
       body: JSON.stringify({
+        action: "reserve",
         email: email,
         items: selectedItems
       })
@@ -119,15 +132,128 @@ async function reserveGifts() {
     }
 
     showMessage("¡Listo! Tus regalos fueron reservados correctamente.", "success");
-    emailInput.value = "";
+
     await loadGifts();
+    await loadMyReservations();
 
   } catch (error) {
-    console.error(error);
-    showMessage("Ocurrió un error. Intenta nuevamente.", "error");
+    console.error("Error al reservar:", error);
+    showMessage("Ocurrió un error: " + error.message, "error");
   } finally {
     reserveBtn.disabled = false;
     reserveBtn.textContent = "Confirmar regalos";
+  }
+}
+
+async function loadMyReservations() {
+  const email = emailInput.value.trim().toLowerCase();
+
+  myReservations.innerHTML = "";
+
+  if (!email) {
+    showMessage("Ingresa tu correo para ver tus regalos.", "error");
+    return;
+  }
+
+  if (!validateEmail(email)) {
+    showMessage("Ingresa un correo válido.", "error");
+    return;
+  }
+
+  try {
+    myReservations.innerHTML = "<p>Cargando tus regalos...</p>";
+
+    const url = `${API_URL}?action=myReservations&email=${encodeURIComponent(email)}`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (!data.ok) {
+      throw new Error(data.message || "No se pudieron cargar tus reservas");
+    }
+
+    renderMyReservations(data.reservations);
+
+  } catch (error) {
+    console.error("Error al cargar reservas:", error);
+    myReservations.innerHTML = `<p>${error.message}</p>`;
+  }
+}
+
+function renderMyReservations(reservations) {
+  myReservations.innerHTML = "";
+
+  if (!reservations || reservations.length === 0) {
+    myReservations.innerHTML = "<p>No tienes regalos reservados con este correo.</p>";
+    return;
+  }
+
+  reservations.forEach(reservation => {
+    const item = document.createElement("div");
+    item.className = "reservation-item";
+
+    item.innerHTML = `
+      <span>${reservation.itemName}</span>
+      <button class="cancel-btn" data-item="${reservation.itemId}">
+        Liberar
+      </button>
+    `;
+
+    myReservations.appendChild(item);
+  });
+
+  const cancelButtons = document.querySelectorAll(".cancel-btn");
+
+  cancelButtons.forEach(button => {
+    button.addEventListener("click", async () => {
+      const itemId = button.getAttribute("data-item");
+      await cancelReservation(itemId);
+    });
+  });
+}
+
+async function cancelReservation(itemId) {
+  const email = emailInput.value.trim().toLowerCase();
+
+  if (!email || !validateEmail(email)) {
+    showMessage("Ingresa tu correo válido.", "error");
+    return;
+  }
+
+  try {
+    const confirmCancel = confirm("¿Seguro que quieres liberar este regalo?");
+
+    if (!confirmCancel) {
+      return;
+    }
+
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify({
+        action: "cancel",
+        email: email,
+        itemId: itemId
+      })
+    });
+
+    const data = await response.json();
+
+    if (!data.ok) {
+      showMessage(data.message || "No se pudo liberar el regalo.", "error");
+      return;
+    }
+
+    showMessage("Regalo liberado correctamente. Ahora puedes elegir otro.", "success");
+
+    await loadGifts();
+    await loadMyReservations();
+
+  } catch (error) {
+    console.error("Error al cancelar:", error);
+    showMessage("Ocurrió un error: " + error.message, "error");
   }
 }
 
@@ -146,5 +272,6 @@ function clearMessage() {
 }
 
 reserveBtn.addEventListener("click", reserveGifts);
+myReservationsBtn.addEventListener("click", loadMyReservations);
 
 loadGifts();
