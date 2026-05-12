@@ -1,4 +1,4 @@
-const API_URL = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
+const API_URL = "https://script.google.com/macros/s/AKfycbxrjEGeGnNq3cm6U7M5msOymwXG3-2Bim316tm6xqmw4jRcDR9nvQ11p1xqIrGD-Iok/exec";
 
 const giftList = document.getElementById("giftList");
 const reserveBtn = document.getElementById("reserveBtn");
