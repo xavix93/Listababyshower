@@ -301,3 +301,10 @@ section {
   display: block !important;
   margin: 0 auto 18px auto !important;
 }
+/* Centrar botón Confirmar regalos más corto */
+.reserve-btn {
+  width: 100% !important;
+  max-width: 520px !important;
+  display: block !important;
+  margin: 25px auto 0 auto !important;
+}
