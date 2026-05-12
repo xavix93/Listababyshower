@@ -26,7 +26,6 @@ async function loadGifts() {
 
   } catch (error) {
     console.error("Error al cargar regalos:", error);
-
     giftList.innerHTML = `
       <div class="gift-item taken">
         <div>
@@ -134,7 +133,10 @@ async function reserveGifts() {
     showMessage("¡Listo! Tus regalos fueron reservados correctamente.", "success");
 
     await loadGifts();
-    await loadMyReservations();
+
+    if (myReservationsBtn && myReservations) {
+      await loadMyReservations();
+    }
 
   } catch (error) {
     console.error("Error al reservar:", error);
@@ -148,7 +150,13 @@ async function reserveGifts() {
 async function loadMyReservations() {
   const email = emailInput.value.trim().toLowerCase();
 
+  if (!myReservations) {
+    console.error("No existe el div myReservations en el HTML");
+    return;
+  }
+
   myReservations.innerHTML = "";
+  clearMessage();
 
   if (!email) {
     showMessage("Ingresa tu correo para ver tus regalos.", "error");
@@ -176,7 +184,7 @@ async function loadMyReservations() {
 
   } catch (error) {
     console.error("Error al cargar reservas:", error);
-    myReservations.innerHTML = `<p>${error.message}</p>`;
+    myReservations.innerHTML = `<p>Error: ${error.message}</p>`;
   }
 }
 
@@ -220,13 +228,13 @@ async function cancelReservation(itemId) {
     return;
   }
 
+  const confirmCancel = confirm("¿Seguro que quieres liberar este regalo?");
+
+  if (!confirmCancel) {
+    return;
+  }
+
   try {
-    const confirmCancel = confirm("¿Seguro que quieres liberar este regalo?");
-
-    if (!confirmCancel) {
-      return;
-    }
-
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
@@ -271,7 +279,12 @@ function clearMessage() {
   message.className = "message";
 }
 
-reserveBtn.addEventListener("click", reserveGifts);
-myReservationsBtn.addEventListener("click", loadMyReservations);
+if (reserveBtn) {
+  reserveBtn.addEventListener("click", reserveGifts);
+}
+
+if (myReservationsBtn) {
+  myReservationsBtn.addEventListener("click", loadMyReservations);
+}
 
 loadGifts();
