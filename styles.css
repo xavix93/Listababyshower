@@ -12,7 +12,7 @@ body {
 /* Contenedor general centrado */
 .container {
   width: 92%;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 30px 0;
 }
