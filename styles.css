@@ -141,3 +141,60 @@ h2 {
 .error {
   color: #c5221f;
 }
+.manage-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  margin-top: 35px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.manage-card h2 {
+  margin-top: 0;
+}
+
+.secondary-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  background: #666;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #444;
+}
+
+.my-reservations {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.reservation-item {
+  background: #f7f7f7;
+  padding: 14px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel-btn {
+  border: none;
+  background: #d93025;
+  color: white;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-btn:hover {
+  background: #b3261e;
+}
