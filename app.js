@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwSi7IMjXOLWidU6Om13chBmP_BHLskK3XaNz67FPHI5cBQXE0ibaq-XS_Eq2VhMg59oA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbxQovTpcVC5EM4AMlUCkahI1SJZIvl4HyCahHJfbIq6jLzQRdweJd0e6b1geP7AAis-Zw/exec";
 
 const giftList = document.getElementById("giftList");
 const reserveBtn = document.getElementById("reserveBtn");
