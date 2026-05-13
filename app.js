@@ -45,32 +45,32 @@ function renderGifts() {
   giftList.innerHTML = "";
 
   gifts.forEach(gift => {
-  const item = document.createElement("div");
-  item.className = `gift-item ${gift.taken ? "taken" : "available"}`;
+    const item = document.createElement("div");
+    item.className = `gift-item ${gift.taken ? "taken" : "available"}`;
 
-  if (gift.taken) {
-    item.innerHTML = `
-      <div>
-        <span class="gift-name">${gift.name}</span>
-        <br>
-        <small>Stock agotado</small>
-      </div>
-      <span class="status">Tomado</span>
-    `;
-  } else {
-    item.innerHTML = `
-      <label>
-        <input type="checkbox" value="${gift.id}" class="gift-checkbox">
-        <span class="gift-name">${gift.name}</span>
-        <br>
-        <small>Quedan ${gift.remaining} de ${gift.stock}</small>
-      </label>
-      <span class="status">Disponible</span>
-    `;
-  }
+    const stock = gift.stock || 1;
+    const remaining = gift.remaining ?? 0;
 
-  giftList.appendChild(item);
-});
+    if (gift.taken) {
+      item.innerHTML = `
+        <div>
+          <span class="gift-name">${gift.name}</span>
+          <br>
+          <small>Stock agotado</small>
+        </div>
+        <span class="status">Tomado</span>
+      `;
+    } else {
+      item.innerHTML = `
+        <label>
+          <input type="checkbox" value="${gift.id}" class="gift-checkbox">
+          <span class="gift-name">${gift.name}</span>
+          <br>
+          <small>Quedan ${remaining} de ${stock}</small>
+        </label>
+        <span class="status">Disponible</span>
+      `;
+    }
 
     giftList.appendChild(item);
   });
